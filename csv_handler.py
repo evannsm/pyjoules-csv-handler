@@ -19,14 +19,22 @@ class CSVHandler(EnergyHandler):
         """
         super().__init__()
 
-        base_path = os.path.join(base_dir, 'data_analysis/') # Append the 'data_analysis' folder to the path
-        parts = base_path.split(os.sep) # Split the path into components
+        base_dir = os.path.dirname(base_dir)  # Move up one directory level
+        print(f"base_dir after moving up one level: {base_dir}")
+
+        parts = base_dir.split(os.sep) # Split the path into components
         parts = ["src" if part in ("build","install") else part for part in parts] # Replace 'build' with 'src' if it exists in the path
-        base_path = os.sep.join(parts) # Reconstruct the new path
+
+        # Insert new folders after the first occurrence of "src"
+        if "src" in parts:
+            idx = parts.index("src") + 1
+            parts[idx:idx] = ["data_analysis", "log_files"]
+
+        base_dir = os.sep.join(parts) # Reconstruct the new path
 
 
         # Construct destination folder and ensure it exists
-        energy_dir = os.path.join(base_path, 'energy_files')
+        energy_dir = os.path.join(base_dir, 'pyJoules_files')
         os.makedirs(energy_dir, exist_ok=True)
 
         # Normalize filename and make it full path
