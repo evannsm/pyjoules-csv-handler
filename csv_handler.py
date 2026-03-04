@@ -71,8 +71,3 @@ class CSVHandler(EnergyHandler):
         for sample in flat_trace:
             csv_file.write(self._gen_sample_line(sample, domain_names) + '\n')
         csv_file.close()
-<<<<<<< HEAD
-        self.traces = []
-=======
-        self.traces = []
->>>>>>> 2d2e64e (update)
