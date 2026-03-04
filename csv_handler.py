@@ -20,7 +20,6 @@ class CSVHandler(EnergyHandler):
         super().__init__()
 
         base_dir = os.path.dirname(base_dir)  # Move up one directory level
-        print(f"base_dir after moving up one level: {base_dir}")
 
         parts = base_dir.split(os.sep) # Split the path into components
         parts = ["src" if part in ("build","install") else part for part in parts] # Replace 'build' with 'src' if it exists in the path
@@ -72,4 +71,8 @@ class CSVHandler(EnergyHandler):
         for sample in flat_trace:
             csv_file.write(self._gen_sample_line(sample, domain_names) + '\n')
         csv_file.close()
+<<<<<<< HEAD
         self.traces = []
+=======
+        self.traces = []
+>>>>>>> 2d2e64e (update)
